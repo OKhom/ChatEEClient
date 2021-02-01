@@ -31,7 +31,7 @@ public class Chatroom {
         System.out.println("Enter name your chatroom:");
         String chatroomName = scanner.nextLine().strip();
         if (chatroomName.isEmpty()) {
-            System.out.println("You don't input chatroom name. Create of chatroom is false. Try again...");
+            System.out.println("You didn't input chatroom name. Create of chatroom is false. Try again...");
             return;
         }
         System.out.println("Enter members of chatroom: ");
@@ -48,7 +48,7 @@ public class Chatroom {
             }
         } while (!listFull);
         if (members.size() == 0) {
-            System.out.println("You don't input chatroom members. Create of chatroom is false. Try again...");
+            System.out.println("You didn't input chatroom members. Create of chatroom is false. Try again...");
             return;
         }
         members.add(user.getLogin());
@@ -56,13 +56,15 @@ public class Chatroom {
 
         int response = chatroom.send(Utils.getURL() + "/chatroom");
 
-        if (response != 200) { // 200 OK
-            System.out.println("HTTP error occurred: " + response);
-        } else {
+        if (response == 200) { // 200 OK
             System.out.println("New chatroom '" + chatroomName + "' created. Members of chatroom are:");
             for (String member : members) {
                 System.out.println("\t" + member);
             }
+        } else if (response == 409) {   // 409 CONFLICT
+            System.out.println("Chatroom or User with entered chatroom name is exist. Try again with another chatroom name...");
+        } else {
+            System.out.println("HTTP error occurred: " + response);
         }
     }
 
