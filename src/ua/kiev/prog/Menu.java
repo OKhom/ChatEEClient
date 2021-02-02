@@ -1,5 +1,11 @@
 package ua.kiev.prog;
 
+import ua.kiev.prog.chatroom.Chatroom;
+import ua.kiev.prog.messages.Message;
+import ua.kiev.prog.users.User;
+import ua.kiev.prog.users.UserStatus;
+import ua.kiev.prog.utils.Utils;
+
 import java.io.IOException;
 import java.util.Scanner;
 
